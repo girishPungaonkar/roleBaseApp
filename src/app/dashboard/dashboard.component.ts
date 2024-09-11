@@ -13,7 +13,7 @@ export class DashboardComponent implements OnInit {
   menuItems: any[] = [];
   showIndividualDashboard: boolean = true;
   showCorporateDashboard: boolean = false;
-  selectedMenu: string = '';  // Initially no menu selected
+  selectedMenu: string = '';
   formData: any = {
     name: '',
     mobileNumber: '',
@@ -104,19 +104,15 @@ basicDetailsForm: any;
       Object.values(form.controls).forEach(control => control.markAsTouched());
       return; // Don't proceed if the form is invalid
     }
-    console.log(`Saving ${menuName} data`, this.formData);
   }
 
   submit(): void {
     if (this.isSubmitEnabled()) {
-      console.log('Submitting all data', this.formData);
-      // Implement submit logic here
     }
   }
 
     // Function to check if form data for a module is valid
     isFormValid(moduleName: string): boolean {
-      // Implement validation logic specific to each module
       switch (moduleName) {
         case 'Basic Details':
           return (
@@ -160,7 +156,6 @@ basicDetailsForm: any;
     }
   
 
-  // Function to validate if all required fields are filled
   isSubmitEnabled(): boolean {
     const requiredFieldsForIndividual = [
       'name', 'mobileNumber', 'emailId', 'birthDate',
@@ -174,7 +169,7 @@ basicDetailsForm: any;
       'corporateDetail1', 'corporateDetail2'
     ];
 
-    let requiredFields: string[] = [];  // Explicitly typed as string[]
+    let requiredFields: string[] = [];  
     
     if (this.showIndividualDashboard) {
       requiredFields = requiredFieldsForIndividual;
@@ -182,7 +177,6 @@ basicDetailsForm: any;
       requiredFields = requiredFieldsForCorporate;
     }
 
-    // Check if all required fields are filled
     return requiredFields.every(field => this.formData[field] && this.formData[field].trim() !== '');
   }
 

@@ -17,14 +17,11 @@ export class LoginComponent {
     this.apiService.getUsers().subscribe(users => {
       const user = users.find(u => u.login_id === this.loginId && u.password === this.password);
       if (user) {
-        console.log('User found:', user); // Debug user info
         
         this.apiService.getDashboardData().subscribe(response => {
-          console.log('Dashboard data response:', response); // Debug dashboard response
 
           // Save the entire response to localStorage
           localStorage.setItem('modules', JSON.stringify(response));
-          console.log('Login successful');
           
           // Redirect to dashboard
           this.router.navigate(['/dashboard']);
