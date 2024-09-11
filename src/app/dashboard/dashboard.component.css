@@ -1,0 +1,252 @@
+/* custom.css */
+
+header.bg-dark {
+  background-color: #007bff; /* Blue theme background */
+  color: #fff; /* White text color */
+  padding: 20px;
+  border-bottom: 3px solid #0056b3; /* Adding a darker blue bottom border for a sleek look */
+}
+
+header .nav-link {
+  color: #ffffff;
+  font-size: 18px;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: color 0.3s ease, background-color 0.3s ease;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+header .nav-link:hover, 
+header .nav-link.active {
+  background-color: #0056b3; /* Darker blue for active and hover states */
+  color: #ffffff;
+}
+
+header .btn-light {
+  background-color: #ffffff;
+  color: #007bff;
+  font-weight: bold;
+  border-radius: 50px;
+  padding: 10px 25px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+header .btn-light:hover {
+  background-color: #e2e6ea;
+  color: #0056b3;
+}
+
+header .d-flex {
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+  header .nav {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header .nav-link {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  header .btn-light {
+    margin-top: 10px;
+  }
+}
+
+
+.nav-link {
+  color: #ffffff; /* Text color */
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  color: #fff !important;
+}
+
+.nav-link i {
+  font-size: 18px; /* Icon size */
+}
+
+.nav-link.active {
+  background-color: #007bff; /* Active link background */
+  color: #fff !important; /* Active link text color */
+}
+
+.nav-item:not(:last-child) {
+  margin-bottom: 10px; /* Spacing between items */
+}
+
+.content-box {
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 40px;
+  max-width: 900px;
+}
+
+.navbar-brand {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.btn-light {
+  background-color: #f8f9fa;
+  color: #007bff;
+  border: 1px solid #007bff;
+}
+
+.btn-light:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.btn-success {
+  border-radius: 20px;
+}
+.sidebar {
+  height: 100%;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.dashboard {
+  height: 100vh; /* 100% of the viewport height */
+  display: flex;
+  flex-direction: column; /* To handle other content in the dashboard */
+}
+
+.sidebar {
+  background-color: #007bff; /* Blue theme for sidebar */
+  padding: 20px;
+}
+
+.dashboard-main {
+  background-color: #ffffff; /* White background for a clean look */
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Larger shadow for depth */
+  max-width: 800px;
+  margin: 20px auto; /* Center align the dashboard */
+  font-family: 'Roboto', sans-serif; /* Modern font */
+}
+
+.dashboard-main h3 {
+  font-size: 28px;
+  color: #007bff; /* Primary blue color for headers */
+  font-weight: 700;
+  margin-bottom: 30px;
+  text-align: center;
+  text-transform: capitalize;
+  border-bottom: 2px solid #007bff; /* Line under header for a more defined look */
+  padding-bottom: 10px;
+}
+
+.dashboard-main .form-label {
+  font-weight: 600;
+  color: #495057; /* Darker color for form labels */
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.dashboard-main .form-control {
+  border-radius: 6px;
+  border: 1px solid #ced4da;
+  padding: 12px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background-color: #f8f9fa;
+}
+
+.dashboard-main .form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* Stronger blue focus effect */
+  background-color: #ffffff;
+}
+
+.dashboard-main .btn-primary {
+  background-color: #007bff;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 50px;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  max-width: 300px;
+  margin: 20px auto;
+  display: block;
+}
+
+.dashboard-main .btn-primary:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+.dashboard-main .mb-3 {
+  margin-bottom: 25px;
+}
+
+.dashboard-main form {
+  max-width: 600px;
+  margin: 0 auto; /* Center the form */
+}
+
+.dashboard-main input::placeholder {
+  color: #6c757d;
+  font-style: italic;
+}
+
+.dashboard-main .form-control {
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.dashboard-main .form-control:hover {
+  background-color: #f1f1f1; /* Light hover effect */
+}
+
+.dashboard-main button:disabled {
+  background-color: #cccccc; /* Disabled button color */
+  cursor: not-allowed;
+}
+
+.dashboard-main .btn-success.submit {
+  background-color: #007bff; /* Primary blue color to match the theme */
+  border: none;
+  padding: 12px 25px;
+  border-radius: 50px;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  max-width: 300px;
+  margin: 20px auto;
+  display: block;
+}
+
+.dashboard-main .btn-success.submit:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+.dashboard-main .btn-success.submit:disabled {
+  background-color: #cccccc; /* Disabled button style */
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+
+
+

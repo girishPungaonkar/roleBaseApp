@@ -1,0 +1,45 @@
+{
+  "users": [
+    {
+      "login_id": "abc@gmail.com",
+      "password": "abc"
+    },
+    {
+      "login_id": "xyz@gmail.com",
+      "password": "123"
+    }
+  ],
+  "response": {
+    "Individual": {
+      "role": "Individual",
+      "modules": [
+        {
+          "module_name": "Basic Details"
+        },
+        {
+          "module_name": "Address Details"
+        },
+        {
+          "module_name": "Personal Details"
+        }
+      ]
+    },
+    "Corporate": {
+      "role": "Corporate",
+      "modules": [
+        {
+          "module_name": "Company Details"
+        },
+        {
+          "module_name": "Address Details"
+        },
+        {
+          "module_name": "Contact Person Details"
+        },
+        {
+          "module_name": "Corporate Details"
+        }
+      ]
+    }
+  }
+}

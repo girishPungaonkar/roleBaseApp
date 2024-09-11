@@ -1,0 +1,253 @@
+<div class="dashboard">
+  <!-- Header -->
+  <header class="bg-dark text-white p-3">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <!-- Menu -->
+        <nav>
+          <ul class="nav">
+            <li class="nav-item">
+              <a
+                class="nav-link text-white"
+                [ngClass]="{'active': showIndividualDashboard}"
+                (click)="toggleDashboard('Individual')"
+              >Individual</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link text-white"
+                [ngClass]="{'active': showCorporateDashboard}"
+                (click)="toggleDashboard('Corporate')"
+              >Corporate</a>
+            </li>
+          </ul>
+        </nav>
+        <!-- Logout Button -->
+        <button class="btn btn-light" (click)="logout()">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="row m-0">
+    <!-- Sidebar -->
+    <div class="col-md-3 p-0">
+      <div class="sidebar bg-light p-3">
+        <ul class="nav flex-column">
+          <li *ngFor="let item of menuItems" class="nav-item mb-2">
+            <a
+              class="nav-link d-flex align-items-center text-dark"
+              [ngClass]="{'active': selectedMenu === item.module_name}"
+              (click)="selectMenu(item.module_name)"
+            >
+              <!-- Add Font Awesome icons here -->
+              <i [ngClass]="getIcon(item.module_name)" class="me-2"></i> 
+              {{ item.module_name }}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+    <!-- Main content -->
+    <div class="col-md-9 dashboard-main mt-4">
+      <!-- Display fields based on selected menu item -->
+      <div *ngIf="selectedMenu === 'Basic Details'">
+        <h3>Basic Details</h3>
+        <form #basicDetailsForm="ngForm" (ngSubmit)="save('Basic Details', basicDetailsForm)">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" id="name" class="form-control" [(ngModel)]="formData.name" name="name" required>
+            <div *ngIf="basicDetailsForm.submitted && basicDetailsForm.controls['name']?.invalid" class="text-danger">
+              Name is required
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="mobileNumber" class="form-label">Mobile Number</label>
+            <input type="text" id="mobileNumber" class="form-control" [(ngModel)]="formData.mobileNumber" name="mobileNumber" pattern="[0-9]{10}" required>
+            <div *ngIf="basicDetailsForm.submitted && basicDetailsForm.controls['mobileNumber']?.invalid" class="text-danger">
+              Valid mobile number is required (10 digits)
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="emailId" class="form-label">Email Id</label>
+            <input type="email" id="emailId" class="form-control" [(ngModel)]="formData.emailId" name="emailId" required>
+            <div *ngIf="basicDetailsForm.submitted && basicDetailsForm.controls['emailId']?.invalid" class="text-danger">
+              Valid email is required
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="birthDate" class="form-label">Birth Date</label>
+            <input type="date" id="birthDate" class="form-control" [(ngModel)]="formData.birthDate" name="birthDate" required>
+            <div *ngIf="basicDetailsForm.submitted && basicDetailsForm.controls['birthDate']?.invalid" class="text-danger">
+              Birth date is required
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+      </div>
+      
+      <div *ngIf="selectedMenu === 'Address Details'">
+        <h3>Address Details</h3>
+        <form #addressDetailsForm="ngForm" (ngSubmit)="save('Address Details', addressDetailsForm)">
+          <div class="mb-3">
+            <label for="addressLine1" class="form-label">Address Line 1</label>
+            <input type="text" id="addressLine1" class="form-control" [(ngModel)]="formData.addressLine1" name="addressLine1" required>
+            <div *ngIf="addressDetailsForm.submitted && addressDetailsForm.controls['addressLine1']?.invalid" class="text-danger">
+              Address Line 1 is required
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="addressLine2" class="form-label">Address Line 2</label>
+            <input type="text" id="addressLine2" class="form-control" [(ngModel)]="formData.addressLine2" name="addressLine2">
+          </div>
+          <div class="mb-3">
+            <label for="district" class="form-label">District</label>
+            <input type="text" id="district" class="form-control" [(ngModel)]="formData.district" name="district" required>
+            <div *ngIf="addressDetailsForm.submitted && addressDetailsForm.controls['district']?.invalid" class="text-danger">
+              District is required
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="city" class="form-label">City</label>
+            <input type="text" id="city" class="form-control" [(ngModel)]="formData.city" name="city" required>
+            <div *ngIf="addressDetailsForm.submitted && addressDetailsForm.controls['city']?.invalid" class="text-danger">
+              City is required
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="state" class="form-label">State</label>
+            <input type="text" id="state" class="form-control" [(ngModel)]="formData.state" name="state" required>
+            <div *ngIf="addressDetailsForm.submitted && addressDetailsForm.controls['state']?.invalid" class="text-danger">
+              State is required
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="pincode" class="form-label">Pincode</label>
+            <input type="text" id="pincode" class="form-control" [(ngModel)]="formData.pincode" name="pincode" pattern="[0-9]{6}" required>
+            <div *ngIf="addressDetailsForm.submitted && addressDetailsForm.controls['pincode']?.invalid" class="text-danger">
+              Valid 6-digit pincode is required
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+      </div>
+      
+      <div *ngIf="selectedMenu === 'Personal Details'">
+        <h3>Personal Details</h3>
+        <form #personalDetailsForm="ngForm" (ngSubmit)="save('Personal Details', personalDetailsForm)">
+          <div class="mb-3">
+            <label for="panNumber" class="form-label">PAN Number</label>
+            <input type="text" id="panNumber" class="form-control" [(ngModel)]="formData.panNumber" name="panNumber" pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}" required>
+            <div *ngIf="personalDetailsForm.submitted && personalDetailsForm.controls['panNumber']?.invalid" class="text-danger">
+              Valid PAN number is required (format: AAAAA9999A)
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="vehicleNumber" class="form-label">Vehicle Number</label>
+            <input type="text" id="vehicleNumber" class="form-control" [(ngModel)]="formData.vehicleNumber" name="vehicleNumber" pattern="[A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{1,4}" required>
+            <div *ngIf="personalDetailsForm.submitted && personalDetailsForm.controls['vehicleNumber']?.invalid" class="text-danger">
+              Valid vehicle number is required (format: AA00AA0000)
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+      </div>
+      
+      <div *ngIf="selectedMenu === 'Company Details'">
+        <h3>Company Details</h3>
+        <form #companyDetailsForm="ngForm" (ngSubmit)="save('Company Details', companyDetailsForm)">
+          <div class="mb-3">
+            <label for="companyNumber" class="form-label">Company Number</label>
+            <input type="text" id="companyNumber" class="form-control" [(ngModel)]="formData.companyNumber" name="companyNumber" required>
+            <div *ngIf="companyDetailsForm.submitted && companyDetailsForm.controls['companyNumber']?.invalid" class="text-danger">
+              Company Number is required
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="companyTIN" class="form-label">Company TIN</label>
+            <input type="text" id="companyTIN" class="form-control" [(ngModel)]="formData.companyTIN" name="companyTIN" pattern="[A-Za-z0-9]{14}" required>
+            <div *ngIf="companyDetailsForm.submitted && companyDetailsForm.controls['companyTIN']?.invalid" class="text-danger">
+              Valid TIN is required (14 alphanumeric characters)
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="companyType" class="form-label">Company Type</label>
+            <select id="companyType" class="form-control" [(ngModel)]="formData.companyType" name="companyType" required>
+              <option value="" disabled>Select company type</option>
+              <option value="SME">SME</option>
+              <option value="MME">MME</option>
+              <option value="LLP">LLP</option>
+              <option value="Startup">Startup</option>
+              <option value="Private">Private</option>
+              <option value="Public">Public</option>
+            </select>
+            <div *ngIf="companyDetailsForm.submitted && companyDetailsForm.controls['companyType']?.invalid" class="text-danger">
+              Company type is required
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+      </div>
+      
+      <div *ngIf="selectedMenu === 'Contact Person Details'">
+        <h3>Contact Person Details</h3>
+        <form #contactPersonDetailsForm="ngForm" (ngSubmit)="save('Contact Person Details', contactPersonDetailsForm)">
+          <div class="mb-3">
+            <label for="contactPersonName" class="form-label">Contact Person Name</label>
+            <input type="text" id="contactPersonName" class="form-control" [(ngModel)]="formData.contactPersonName" name="contactPersonName" required>
+            <div *ngIf="contactPersonDetailsForm.submitted && contactPersonDetailsForm.controls['contactPersonName']?.invalid" class="text-danger">
+              Contact Person Name is required
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="contactPersonMobileNumber" class="form-label">Contact Person Mobile Number</label>
+            <input type="text" id="contactPersonMobileNumber" class="form-control" [(ngModel)]="formData.contactPersonMobileNumber" name="contactPersonMobileNumber" pattern="[0-9]{10}" required>
+            <div *ngIf="contactPersonDetailsForm.submitted && contactPersonDetailsForm.controls['contactPersonMobileNumber']?.invalid" class="text-danger">
+              Valid mobile number is required (10 digits)
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="contactPersonEmail" class="form-label">Contact Person Email</label>
+            <input type="email" id="contactPersonEmail" class="form-control" [(ngModel)]="formData.contactPersonEmail" name="contactPersonEmail" required>
+            <div *ngIf="contactPersonDetailsForm.submitted && contactPersonDetailsForm.controls['contactPersonEmail']?.invalid" class="text-danger">
+              Valid email is required
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="designation" class="form-label">Designation</label>
+            <input type="text" id="designation" class="form-control" [(ngModel)]="formData.designation" name="designation" required>
+            <div *ngIf="contactPersonDetailsForm.submitted && contactPersonDetailsForm.controls['designation']?.invalid" class="text-danger">
+              Designation is required
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+      </div>
+
+      <div *ngIf="selectedMenu === 'Corporate Details'">
+        <h3>Corporate Details</h3>
+        <form #corporateDetailsForm="ngForm">
+          <div class="mb-3">
+            <label for="corporateDetail1" class="form-label">Corporate Detail 1</label>
+            <input type="text" id="corporateDetail1" class="form-control" [(ngModel)]="formData.corporateDetail1" name="corporateDetail1" #corporateDetail1="ngModel" required>
+            <div *ngIf="corporateDetail1.invalid && (corporateDetail1.dirty || corporateDetailsForm.submitted)" class="text-danger">
+              Corporate Detail 1 is required
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="corporateDetail2" class="form-label">Corporate Detail 2</label>
+            <input type="text" id="corporateDetail2" class="form-control" [(ngModel)]="formData.corporateDetail2" name="corporateDetail2" #corporateDetail2="ngModel" required>
+            <div *ngIf="corporateDetail2.invalid && (corporateDetail2.dirty || corporateDetailsForm.submitted)" class="text-danger">
+              Corporate Detail 2 is required
+            </div>
+          </div>
+          <button type="button" class="btn btn-primary" (click)="save('Corporate Details', corporateDetailsForm)">Save</button>
+        </form>
+      </div>
+      
+      
+      
+      <button type="button" class="btn btn-success" [disabled]="!isSubmitEnabled()" (click)="submit()">Submit All</button>
+    </div>
+  </div>
+</div>
